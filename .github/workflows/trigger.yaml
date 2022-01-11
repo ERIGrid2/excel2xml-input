@@ -52,6 +52,6 @@ jobs:
     - uses: juztcode/repo-ditpatch-action@v1
       with:
         event-type: release_event
-        token: ${{ secrets.REPO_TRIGGER_KEY }}
+        token: ${{ secrets.GITHUB_TOKEN }}
         repository: "${{ github.repository_owner }}/test-case-descriptions-excel2md"
         client-payload: '{"tag": "${{ steps.tag.outputs.next-release }}" }'

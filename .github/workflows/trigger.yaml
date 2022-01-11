@@ -18,14 +18,14 @@ jobs:
     - name: Get version info
       id:   tag
       run: |
-            NEXT_VERSION=$(./get_next.sh ${{ github.repository_owner }} excel2xml-input)
+            NEXT_VERSION=$(./get_next.sh ${{ github.repository_owner }} test-case-descriptions-excel-input)
             echo "NEXT_VERSION: ${NEXT_VERSION}"
             echo ::set-output name=next-release::${NEXT_VERSION}
 
     - name: Create Archive
       id: create-archive
       run: |
-        zip -r grupoetra excel-use-cases
+        zip -r erigrid2-test-cases excel-test-cases
 
     - name: Create Release
       id: create-release
@@ -45,13 +45,13 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create-release.outputs.upload_url }}
-        asset_path: ./grupoetra.zip
-        asset_name: grupoetra.zip
+        asset_path: ./erigrid2-test-cases.zip
+        asset_name: erigrid2-test-cases.zip
         asset_content_type: application/zip
 
     - uses: juztcode/repo-ditpatch-action@v1
       with:
         event-type: release_event
         token: ${{ secrets.REPO_TRIGGER_KEY }}
-        repository: "${{ github.repository_owner }}/excel2xml"
+        repository: "${{ github.repository_owner }}/test-case-descriptions-excel2md"
         client-payload: '{"tag": "${{ steps.tag.outputs.next-release }}" }'

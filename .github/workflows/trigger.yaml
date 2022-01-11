@@ -1,4 +1,4 @@
-name: Trigger excel2md
+name: Trigger excel-input-release
 
 on:
   workflow_dispatch:
